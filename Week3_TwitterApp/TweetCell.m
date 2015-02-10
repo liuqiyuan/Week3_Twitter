@@ -57,8 +57,8 @@
     [[TwitterClient sharedInstance] favoriteStatusWithParams:dict completion:^(NSDictionary *tweet, NSError *error) {
         if (error != nil) {
             [SVProgressHUD dismiss];
-            self.tweet.numFavoriates = [NSString stringWithFormat:@"%d", 1];
-            self.favoriteLabel.text = self.tweet.numFavoriates;
+            self.tweet.numFavoriates = 1;
+            self.favoriteLabel.text = [NSString stringWithFormat:@"%ld", self.tweet.numFavoriates];
         } else {
             NSLog(@"Failed to favorite a status: %@", error);
         }
@@ -79,8 +79,8 @@
     [[TwitterClient sharedInstance] retweetStatusWithParams:dict completion:^(NSDictionary *tweet, NSError *error) {
         if (error != nil) {
             [SVProgressHUD dismiss];
-            self.tweet.numRetweets = [NSString stringWithFormat:@"%d", 1];
-            self.retweetLabel.text = self.tweet.numFavoriates;
+            self.tweet.numRetweets = 1;
+            self.retweetLabel.text = [NSString stringWithFormat:@"%ld", self.tweet.numRetweets];
         } else {
             NSLog(@"Failed to retweet a status: %@", error);
         }
@@ -98,8 +98,8 @@
     self.idLabel.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
     self.createdDateLabel.text = [Utils calculateDateDiff:tweet.createdDate];
     self.tweetTextLabel.text = tweet.text;
-    self.favoriteLabel.text = tweet.numFavoriates;
-    self.retweetLabel.text = tweet.numRetweets;
+    self.favoriteLabel.text = [NSString stringWithFormat:@"%ld", tweet.numFavoriates];
+    self.retweetLabel.text = [NSString stringWithFormat:@"%ld", tweet.numRetweets];
 }
 
 @end
