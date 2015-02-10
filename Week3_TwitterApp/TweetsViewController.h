@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TweetCell.h"
+#import "Tweet.h"
 
 @interface TweetsViewController : UIViewController
+
+@property (nonatomic, strong) TweetCell *prototypeCell;
 
 @end

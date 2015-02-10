@@ -21,6 +21,8 @@
         formatter.dateFormat = @"EEE MMM d HH:mm:ss Z y";
         
         self.createdDate = [formatter dateFromString:createdDateStr];
+        self.numFavoriates = dictionary[@"favorite_count"];
+        self.numRetweets = dictionary[@"retweet_count"];
     }
 
     return self;
@@ -30,6 +32,7 @@
     NSMutableArray *tweets = [NSMutableArray array];
     
     for (NSDictionary *dict in array) {
+        NSLog(@"tweet %@", dict);
         [tweets addObject:[[Tweet alloc]initWithDictionary:dict]];
     }
     

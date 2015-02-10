@@ -15,7 +15,8 @@
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSDate *createdDate;
 @property (nonatomic, strong) User *user;
-@property (nonatomic, strong) NSString *imageUrl;
+@property (nonatomic, strong) NSString *numRetweets;
+@property (nonatomic, strong) NSString *numFavoriates;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

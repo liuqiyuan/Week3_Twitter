@@ -11,6 +11,8 @@
 #import "Tweet.h"
 #import "TwitterClient.h"
 #import "TweetCell.h"
+#import "ComposeViewController.h"
+#import "TweetDetailViewController.h"
 #import <SVProgressHUD/SVProgressHUD.H>
 
 @interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -31,7 +33,7 @@
     // Set navigation bar
     self.title = @"Tweets";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogOutSelector)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onNewSelector)];
     
     // Set refresh controll
     self.refreshController = [[UIRefreshControl alloc]init];
@@ -44,12 +46,21 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:nil] forCellReuseIdentifier:@"TweetCell"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
+    // Add observer
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchDataWithoutCall:) name:UserDidComposeNotification object:nil];
+    
     // Fetch data
     [self fetchData];
 }
 
 - (void)onLogOutSelector {
     [User logout];
+}
+
+- (void)onNewSelector {
+    ComposeViewController *vc = [[ComposeViewController alloc] init];
+    vc.user = [User currentUser];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -69,7 +80,32 @@
     return self.tweetsArray.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.prototypeCell setTweet:self.tweetsArray[indexPath.row]];
+    [self.prototypeCell layoutIfNeeded];
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height + 1;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TweetDetailViewController *vc = [[TweetDetailViewController alloc] init];
+    [vc setTweet:self.tweetsArray[indexPath.row]];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma - api functions 
+- (void)fetchDataWithoutCall: (NSNotification *) notification {
+    NSDictionary *dict = notification.userInfo;
+    Tweet *tweet = [[Tweet alloc]initWithDictionary:dict];
+    
+    if (tweet != nil) {
+        NSMutableArray *newArray = [[NSMutableArray alloc]initWithObjects:tweet, nil];
+        [newArray addObjectsFromArray:self.tweetsArray];
+        self.tweetsArray = newArray;
+        [self.tableView reloadData];
+    }
+}
+
 - (void)fetchData {
     [SVProgressHUD show];
     [SVProgressHUD setBackgroundColor: [UIColor blackColor]];
@@ -78,6 +114,7 @@
     
     [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
         if (error == nil) {
+           
             self.tweetsArray = tweets;
         
             [self.tableView reloadData];
@@ -87,6 +124,14 @@
             NSLog(@"Error fetching data: %@", error);
         }
     }];
+}
+
+#pragma - setter for prototype cell
+- (TweetCell *)prototypeCell {
+    if (!_prototypeCell) {
+        _prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    }
+    return _prototypeCell;
 }
 
 - (void)didReceiveMemoryWarning {

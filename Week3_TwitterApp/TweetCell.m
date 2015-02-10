@@ -8,10 +8,14 @@
 
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "Utils.h"
 
 @interface TweetCell()
 @property (weak, nonatomic) IBOutlet UIImageView *tweetImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *idLabel;
+@property (weak, nonatomic) IBOutlet UILabel *createdDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tweetTextLabel;
 
 @end
 
@@ -19,6 +23,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    self.tweetTextLabel.preferredMaxLayoutWidth = self.tweetTextLabel.frame.size.width;
+    self.tweetImageView.layer.cornerRadius = 5;
+    self.tweetImageView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -30,8 +38,11 @@
 - (void)setTweet:(Tweet *)tweet {
     _tweet = tweet;
     
-    [self.tweetImageView setImageWithURL:[NSURL URLWithString:tweet.imageUrl]];
+    [self.tweetImageView setImageWithURL:[NSURL URLWithString:tweet.user.profileImageUrl]];
     self.nameLabel.text = tweet.user.name;
+    self.idLabel.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
+    self.createdDateLabel.text = [Utils calculateDateDiff:tweet.createdDate];
+    self.tweetTextLabel.text = tweet.text;
 }
 
 @end
