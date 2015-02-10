@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *viewBox;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
+@property (weak, nonatomic) IBOutlet UIButton *replyButton;
 
 @end
 
@@ -55,6 +56,8 @@
 - (IBAction)onLikeButtonClick:(id)sender {
 }
 - (IBAction)onRetweetButtonClick:(id)sender {
+}
+- (IBAction)onReplyButtonClick:(id)sender {
 }
 
 /*

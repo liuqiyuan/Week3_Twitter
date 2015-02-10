@@ -13,6 +13,7 @@
                 <outlet property="idLabel" destination="Arc-H4-mhR" id="Xyl-kA-CwD"/>
                 <outlet property="likeButton" destination="CT9-8h-f99" id="9Z7-Vb-juQ"/>
                 <outlet property="nameLabel" destination="a8h-Qc-Xdf" id="deU-3C-Pvm"/>
+                <outlet property="replyButton" destination="Wdi-2m-duw" id="y3g-VJ-Hlj"/>
                 <outlet property="retweetButton" destination="tDu-PO-waE" id="hSD-pB-Rau"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewBox" destination="udc-CO-6Jr" id="yWN-je-9ok"/>
@@ -85,8 +86,8 @@
                         <constraint firstAttribute="centerX" secondItem="d9W-mA-rnQ" secondAttribute="centerX" id="NYJ-AV-DPd"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CT9-8h-f99">
-                    <rect key="frame" x="12" y="204" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CT9-8h-f99">
+                    <rect key="frame" x="8" y="214" width="30" height="27"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="Like">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,8 +96,8 @@
                         <action selector="onLikeButtonClick:" destination="-1" eventType="touchUpInside" id="R79-bj-yql"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDu-PO-waE">
-                    <rect key="frame" x="79" y="204" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDu-PO-waE">
+                    <rect key="frame" x="56" y="214" width="46" height="27"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="Retweet">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -105,16 +106,31 @@
                         <action selector="onRetweetButtonClick:" destination="-1" eventType="touchUpInside" id="DKW-de-HVh"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wdi-2m-duw">
+                    <rect key="frame" x="120" y="214" width="32" height="27"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="Reply">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onReplyButtonClick:" destination="-1" eventType="touchUpInside" id="BD6-Yu-2Ek"/>
+                        <action selector="onRetweetButtonClick:" destination="-1" eventType="touchUpInside" id="yas-8N-Gph"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="udc-CO-6Jr" secondAttribute="trailing" constant="8" id="3Bu-a8-8TR"/>
                 <constraint firstItem="Nm6-TF-C1U" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Arc-H4-mhR" secondAttribute="bottom" constant="8" id="4wf-Tc-nVp"/>
                 <constraint firstItem="HLY-YA-flr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="5Zw-rl-Y0K"/>
+                <constraint firstItem="Wdi-2m-duw" firstAttribute="top" secondItem="udc-CO-6Jr" secondAttribute="bottom" constant="8" id="5eW-jc-ewg"/>
                 <constraint firstItem="a8h-Qc-Xdf" firstAttribute="leading" secondItem="i9T-Mb-tdi" secondAttribute="trailing" constant="8" id="7E4-cq-9x6"/>
+                <constraint firstItem="CT9-8h-f99" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="7ET-Cs-Mu5"/>
+                <constraint firstItem="Wdi-2m-duw" firstAttribute="leading" secondItem="tDu-PO-waE" secondAttribute="trailing" constant="18" id="7Wh-3n-VK8"/>
                 <constraint firstItem="a8h-Qc-Xdf" firstAttribute="leading" secondItem="i9T-Mb-tdi" secondAttribute="trailing" constant="8" id="8O3-qs-GOG"/>
                 <constraint firstItem="Nm6-TF-C1U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="985-fa-PcQ"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Arc-H4-mhR" secondAttribute="trailing" constant="8" id="9Yk-lT-mf1"/>
+                <constraint firstItem="tDu-PO-waE" firstAttribute="leading" secondItem="CT9-8h-f99" secondAttribute="trailing" constant="18" id="AOf-eP-szg"/>
                 <constraint firstItem="i9T-Mb-tdi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="B2B-RN-HU3"/>
                 <constraint firstItem="Nm6-TF-C1U" firstAttribute="leading" secondItem="i9T-Mb-tdi" secondAttribute="trailing" constant="8" id="DWr-Rk-qbX"/>
                 <constraint firstItem="Arc-H4-mhR" firstAttribute="top" secondItem="a8h-Qc-Xdf" secondAttribute="bottom" constant="2" id="ExV-7E-eIH"/>
@@ -125,8 +141,13 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HLY-YA-flr" secondAttribute="trailing" constant="8" id="MfQ-s4-07X"/>
                 <constraint firstAttribute="trailing" secondItem="Nm6-TF-C1U" secondAttribute="trailing" constant="8" id="TE2-Z5-D8e"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a8h-Qc-Xdf" secondAttribute="trailing" constant="8" id="ZCl-S5-TpG"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Wdi-2m-duw" secondAttribute="trailing" constant="18" id="ZUK-eb-h7g"/>
                 <constraint firstItem="udc-CO-6Jr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Zor-if-sfJ"/>
+                <constraint firstItem="Wdi-2m-duw" firstAttribute="leading" secondItem="tDu-PO-waE" secondAttribute="trailing" constant="18" id="beP-c6-9Ji"/>
+                <constraint firstItem="tDu-PO-waE" firstAttribute="top" secondItem="udc-CO-6Jr" secondAttribute="bottom" constant="8" id="csD-el-GVB"/>
+                <constraint firstItem="tDu-PO-waE" firstAttribute="leading" secondItem="CT9-8h-f99" secondAttribute="trailing" constant="18" id="gw8-ja-CAQ"/>
                 <constraint firstItem="Arc-H4-mhR" firstAttribute="leading" secondItem="i9T-Mb-tdi" secondAttribute="trailing" constant="8" id="h32-ke-goD"/>
+                <constraint firstItem="CT9-8h-f99" firstAttribute="top" secondItem="udc-CO-6Jr" secondAttribute="bottom" constant="8" id="hPL-C9-RWN"/>
                 <constraint firstItem="Nm6-TF-C1U" firstAttribute="top" secondItem="i9T-Mb-tdi" secondAttribute="bottom" constant="8" id="jxK-sG-Dtn"/>
                 <constraint firstItem="a8h-Qc-Xdf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="78" id="ngZ-Nq-Qgx"/>
                 <constraint firstItem="Arc-H4-mhR" firstAttribute="leading" secondItem="i9T-Mb-tdi" secondAttribute="trailing" constant="8" id="omr-7f-ctO"/>

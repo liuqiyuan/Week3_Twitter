@@ -15,11 +15,12 @@
 
 NSString * const UserDidComposeNotification = @"UserDidComposeNotification";
 
-@interface ComposeViewController ()
+@interface ComposeViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *composeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *idLabel;
 @property (weak, nonatomic) IBOutlet UITextView *composeTextView;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @end
 
@@ -45,6 +46,9 @@ NSString * const UserDidComposeNotification = @"UserDidComposeNotification";
     self.title = @"Compose";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelCompose)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(onSendTweet)];
+    
+    self.composeTextView.delegate = self;
+    self.countLabel.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
     
     [self.composeImageView setImageWithURL:[NSURL URLWithString:self.user.profileImageUrl]];
     self.nameLabel.text = self.user.name;
@@ -89,6 +93,11 @@ NSString * const UserDidComposeNotification = @"UserDidComposeNotification";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    NSString *text = textView.text;
+    self.countLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[text length]];
 }
 
 /*
