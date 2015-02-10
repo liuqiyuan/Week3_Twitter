@@ -14,6 +14,7 @@
     self = [super init];
     
     if (self) {
+        self.id = (long)dictionary[@"id"];
         self.text = dictionary[@"text"];
         self.user = [[User alloc]initWithDictionary:dictionary[@"user"]];
         NSString *createdDateStr = dictionary[@"created_at"];
@@ -21,8 +22,8 @@
         formatter.dateFormat = @"EEE MMM d HH:mm:ss Z y";
         
         self.createdDate = [formatter dateFromString:createdDateStr];
-        self.numFavoriates = dictionary[@"favorite_count"];
-        self.numRetweets = dictionary[@"retweet_count"];
+        self.numFavoriates = [NSString stringWithFormat:@"%@", dictionary[@"favorite_count"]];
+        self.numRetweets = [NSString stringWithFormat:@"%@", dictionary[@"retweet_count"]];
     }
 
     return self;

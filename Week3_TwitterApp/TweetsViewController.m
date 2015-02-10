@@ -88,6 +88,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     TweetDetailViewController *vc = [[TweetDetailViewController alloc] init];
     [vc setTweet:self.tweetsArray[indexPath.row]];
     [self.navigationController pushViewController:vc animated:YES];

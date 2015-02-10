@@ -90,4 +90,25 @@ NSString * const KTwitterBaseUrl = @"https://api.twitter.com";
     }];
 }
 
+- (void)favoriteStatusWithParams:(NSDictionary *)params completion:(void (^)(NSDictionary *tweet, NSError *error))completion {
+    [self POST:@"https://api.twitter.com/1.1/favorites/create.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dict = responseObject;
+        completion(dict, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }];
+}
+
+- (void)retweetStatusWithParams:(NSDictionary *)params completion:(void (^)(NSDictionary *tweet, NSError *error)) completion {
+    NSString *id_status = [params objectForKey:@"id"];
+    NSMutableString *pathUrl = [NSMutableString stringWithFormat:@"https://api.twitter.com/1.1/statuses/retweet/%@", id_status];
+    [pathUrl appendString:@".json"];
+    [self POST:pathUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dict = responseObject;
+        completion(dict, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }];
+}
+
 @end

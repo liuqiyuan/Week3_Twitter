@@ -9,6 +9,9 @@
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "Utils.h"
+#import "TwitterClient.h"
+#import <SVProgressHUD/SVProgressHUD.H>
+
 
 @interface TweetCell()
 @property (weak, nonatomic) IBOutlet UIImageView *tweetImageView;
@@ -16,6 +19,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *idLabel;
 @property (weak, nonatomic) IBOutlet UILabel *createdDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetTextLabel;
+@property (weak, nonatomic) IBOutlet UIButton *retweetButton;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+@property (weak, nonatomic) IBOutlet UIButton *replyButton;
+@property (weak, nonatomic) IBOutlet UILabel *favoriteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *retweetLabel;
 
 @end
 
@@ -34,6 +42,53 @@
 
     // Configure the view for the selected state
 }
+- (IBAction)onFavoriteButtonClick:(id)sender {
+    NSInteger id_status = self.tweet.id;
+    NSNumber *theNum = [NSNumber numberWithInteger:id_status];
+    
+    [SVProgressHUD show];
+    [SVProgressHUD setBackgroundColor: [UIColor blackColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD showInfoWithStatus:@"Mark Favorite"];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:theNum forKey:@"id"];
+    
+    [[TwitterClient sharedInstance] favoriteStatusWithParams:dict completion:^(NSDictionary *tweet, NSError *error) {
+        if (error != nil) {
+            [SVProgressHUD dismiss];
+            self.tweet.numFavoriates = [NSString stringWithFormat:@"%d", 1];
+            self.favoriteLabel.text = self.tweet.numFavoriates;
+        } else {
+            NSLog(@"Failed to favorite a status: %@", error);
+        }
+    }];
+}
+- (IBAction)onRetweetButtonClick:(id)sender {
+    NSInteger id_status = self.tweet.id;
+    NSNumber *theNum = [NSNumber numberWithInteger:id_status];
+    
+    [SVProgressHUD show];
+    [SVProgressHUD setBackgroundColor: [UIColor blackColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD showInfoWithStatus:@"Retweeting"];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:theNum forKey:@"id"];
+    
+    [[TwitterClient sharedInstance] retweetStatusWithParams:dict completion:^(NSDictionary *tweet, NSError *error) {
+        if (error != nil) {
+            [SVProgressHUD dismiss];
+            self.tweet.numRetweets = [NSString stringWithFormat:@"%d", 1];
+            self.retweetLabel.text = self.tweet.numFavoriates;
+        } else {
+            NSLog(@"Failed to retweet a status: %@", error);
+        }
+    }];
+
+}
+- (IBAction)onReplyButton:(id)sender {
+}
 
 - (void)setTweet:(Tweet *)tweet {
     _tweet = tweet;
@@ -43,6 +98,8 @@
     self.idLabel.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
     self.createdDateLabel.text = [Utils calculateDateDiff:tweet.createdDate];
     self.tweetTextLabel.text = tweet.text;
+    self.favoriteLabel.text = tweet.numFavoriates;
+    self.retweetLabel.text = tweet.numRetweets;
 }
 
 @end
