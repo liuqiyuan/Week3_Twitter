@@ -84,6 +84,7 @@ NSString * const KTwitterBaseUrl = @"https://api.twitter.com";
 - (void)updateStatusWithParams:(NSDictionary *)params completion:(void (^)(NSDictionary *tweet, NSError *error))completion {
     [self POST:@"https://api.twitter.com/1.1/statuses/update.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *dict = responseObject;
+        //NSLog(@"%@", responseObject);
         completion(dict, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completion(nil, error);

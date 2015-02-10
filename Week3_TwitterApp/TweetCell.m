@@ -100,6 +100,18 @@
     self.tweetTextLabel.text = tweet.text;
     self.favoriteLabel.text = [NSString stringWithFormat:@"%ld", tweet.numFavoriates];
     self.retweetLabel.text = [NSString stringWithFormat:@"%ld", tweet.numRetweets];
+    
+    if (tweet.favorited == NO) {
+        [self.favoriteButton setImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
+    } else {
+        [self.favoriteButton setImage:[UIImage imageNamed:@"favorited.png"] forState:UIControlStateNormal];
+    }
+    
+    if (tweet.retweeted == NO) {
+        [self.retweetButton setImage:[UIImage imageNamed:@"retweet.png"] forState:UIControlStateNormal];
+    } else {
+        [self.retweetButton setImage:[UIImage imageNamed:@"retweeted.png"] forState:UIControlStateNormal];
+    }
 }
 
 @end

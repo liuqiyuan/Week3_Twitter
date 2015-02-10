@@ -171,10 +171,10 @@
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="ttl-HX-bUP"/>
                         <exclude reference="VsP-Sb-M2w"/>
                         <exclude reference="gEQ-8k-45l"/>
                         <exclude reference="nA0-Xt-6fQ"/>
-                        <exclude reference="ttl-HX-bUP"/>
                         <exclude reference="3bV-qy-dmw"/>
                         <exclude reference="6Rt-5Z-sIq"/>
                         <exclude reference="rFB-ya-6ib"/>
@@ -183,12 +183,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="createdDateLabel" destination="oaQ-hd-kDW" id="pkM-nc-qx4"/>
-                <outlet property="favoriteButton" destination="7Ji-ju-h5P" id="GrS-5t-cCQ"/>
+                <outlet property="favoriteButton" destination="9vW-kR-ogh" id="3YM-uP-JnZ"/>
                 <outlet property="favoriteLabel" destination="PW4-Eo-loU" id="VgO-Ll-xrn"/>
                 <outlet property="idLabel" destination="FAA-8d-8SA" id="NYo-Dp-b8t"/>
                 <outlet property="nameLabel" destination="Vgg-b5-x1C" id="eFJ-YL-M2K"/>
                 <outlet property="replyButton" destination="O9O-w1-4hK" id="ZQz-vd-roR"/>
-                <outlet property="retweetButton" destination="9vW-kR-ogh" id="K0e-u9-AQX"/>
+                <outlet property="retweetButton" destination="7Ji-ju-h5P" id="1ra-AY-Lsc"/>
                 <outlet property="retweetLabel" destination="snQ-Le-etw" id="Lxg-9s-Ihm"/>
                 <outlet property="tweetImageView" destination="qRv-CB-UEA" id="xvJ-pf-h92"/>
                 <outlet property="tweetTextLabel" destination="cEG-wW-kAS" id="mHx-5y-kJX"/>
