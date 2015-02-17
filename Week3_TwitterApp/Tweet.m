@@ -35,7 +35,6 @@
     NSMutableArray *tweets = [NSMutableArray array];
     
     for (NSDictionary *dict in array) {
-        NSLog(@"tweet %@", dict);
         [tweets addObject:[[Tweet alloc]initWithDictionary:dict]];
     }
     

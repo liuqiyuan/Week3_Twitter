@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 #import "TwitterClient.h"
-#import "TweetsViewController.h"
+#import "RootViewController.h"
 
 @interface LoginViewController ()
 
@@ -19,9 +19,11 @@
 - (IBAction)onLogin:(id)sender {
     [[TwitterClient sharedInstance] loginWithCompletion:^(User *user, NSError *error) {
         if (user != nil) {
-            //present tweets view
+            //present profile page
             NSLog(@"Welcome to %@", user.name);
-            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[TweetsViewController alloc] init]] animated:YES completion:nil];
+            RootViewController *rvc = [[RootViewController alloc]init];
+            [rvc setUser:user];
+            [self presentViewController:rvc animated:YES completion:nil];
         } else {
             //present error view
         }

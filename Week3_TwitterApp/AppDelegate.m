@@ -11,7 +11,8 @@
 #import "TwitterClient.h"
 #import "User.h"
 #import "Tweet.h"
-#import "TweetsViewController.h"
+#import "RootViewController.h"
+#import "MenuController.h"
 
 @interface AppDelegate ()
 
@@ -26,13 +27,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:UserDidLogoutNotification object:nil];
     
     User *user = [User currentUser];
+
     if (user != nil) {
         NSLog(@"welcome %@", user.name);
-        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[TweetsViewController alloc] init]];
-
+        RootViewController *rootVC = [[RootViewController alloc]init];
+        [rootVC setUser:user];
+        self.window.rootViewController = rootVC;
     } else {
         NSLog(@"Not logged in");
-        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        UINavigationController *nVC = [[UINavigationController alloc]initWithRootViewController:loginVC];
+        self.window.rootViewController = nVC;
     }
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -42,7 +47,7 @@
 }
 
 - (void)userDidLogout {
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+    self.window.rootViewController = [[LoginViewController alloc] init];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

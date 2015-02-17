@@ -11,6 +11,9 @@
 @implementation Utils
 
 + (NSString *)calculateDateDiff:(NSDate *)date {
+    if (date == nil) {
+        return nil;
+    }
     NSDate * now = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSUInteger unitFlags = NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour;
